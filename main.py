@@ -2,14 +2,26 @@ from oauth2client.service_account import ServiceAccountCredentials
 import httplib2
 import json
 
-class ToMuchURLS:
+class TooManyURLs:
     """Wyjątek gdy adresów jest więcej niż 100"""
 
+class StopApp:
+    """Wyjątek zatrzymujący aplikację"""
+
+print('Wybierz jedną z dwóch opcji:\n1. Aktualizacja URLi - Przesłanie do indeksu\n2. Usunięcie adresów URL z indeksu')
+option = input('Wybierz 1/2:')
+
+if option == "1":
+    choice = "URL_UPDATED"
+elif option == "2":
+    choice = "URL_DELETED"
+else:
+    raise StopApp("Wybrałęś złą opcję")
 
 '''
 url = "url do zaindeksowania"
 '''
-print("Podaj adres do zaindeksowania (max 100), odzielone przecinkiem.")
+print("Podaj adresy (max 100), odzielone przecinkiem.")
 url = str(input())
 split = ","
 if split in url:
@@ -20,11 +32,11 @@ else:
 Poniższe ograniczenie można zwiększyć, jeśli został zwiększony limit w Indexing Api w GCP.
 """
 if len(urls) > 100:
-    raise ToMuchURLS('Za dużo adresów URL, maksymalnie 100')
+    raise TooManyURLs('Za dużo adresów URL, maksymalnie 100')
 '''
-JSON_KEY_FILE = "scieżka do pliku z kluczem api"
+JSON_KEY_FILE = "scieżka do pliku z kluczem api, domyślna nazwa pliku indexing_api_key.json"
 '''
-JSON_KEY_FILE = "nazwa_pliku.json"
+JSON_KEY_FILE = "indexing_api_key.json"
 
 SCOPES = ["https://www.googleapis.com/auth/indexing"]
 ENDPOINT = "https://indexing.googleapis.com/v3/urlNotifications:publish"
@@ -42,7 +54,7 @@ Wystarczy zmienić poniższy 'type'
 for url in urls:
     send_url = {}
     send_url['url'] = url
-    send_url['type'] = "URL_UPDATED"
+    send_url['type'] = choice
     json_content = json.dumps(send_url)
     print(send_url)
     response, send_url = http.request(ENDPOINT,
