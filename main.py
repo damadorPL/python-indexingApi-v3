@@ -6,7 +6,7 @@ class TooManyURLs:
     """Wyjątek gdy adresów jest więcej niż 100"""
 
 class StopApp:
-    """Wyjątek zatrzymujący aplikację"""
+    """Wyjątek zatrzymujący aplikację podczas złego wyboru z menu"""
 
 print('Wybierz jedną z dwóch opcji:\n1. Aktualizacja URLi - Przesłanie do indeksu\n2. Usunięcie adresów URL z indeksu')
 option = input('Wybierz 1/2:')
@@ -19,7 +19,7 @@ else:
     raise StopApp("Wybrałęś złą opcję")
 
 '''
-url = "url do zaindeksowania"
+if dzielący listę adresów na listę. 
 '''
 print("Podaj adresy (max 100), odzielone przecinkiem.")
 url = str(input())
@@ -49,7 +49,6 @@ http = credentials.authorize(httplib2.Http())
 '''
 URL_UPDATED - aktualizacja urla
 URL_DELETED - usunięcie urla z indeksu
-Wystarczy zmienić poniższy 'type'
 '''
 for url in urls:
     send_url = {}
