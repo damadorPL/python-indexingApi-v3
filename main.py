@@ -55,7 +55,7 @@ for url in urls:
     send_url['url'] = url
     send_url['type'] = choice
     json_content = json.dumps(send_url)
-    print(send_url)
+    print(send_url['url'], " --> ", send_url['type'])
     response, send_url = http.request(ENDPOINT,
                                       method="POST",
                                       body=json_content)
