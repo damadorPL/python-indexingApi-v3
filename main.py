@@ -8,15 +8,21 @@ class TooManyURLs:
 class StopApp:
     """Wyjątek zatrzymujący aplikację podczas złego wyboru z menu"""
 
+"""Menu wyboru opcji aktualizacji lub usunięcia"""
 print('Wybierz jedną z dwóch opcji:\n1. Aktualizacja URLi - Przesłanie do indeksu\n2. Usunięcie adresów URL z indeksu')
 option = input('Wybierz 1/2:')
 
 if option == "1":
     choice = "URL_UPDATED"
 elif option == "2":
-    choice = "URL_DELETED"
+    security_questions = input('Czy na pewno chcesz usunąc adresy? y/n')
+    if security_questions == 'y':
+        choice = "URL_DELETED"
+    elif security_questions == 'n':
+        raise StopApp("Dobry wybór")
 else:
     raise StopApp("Wybrałęś złą opcję")
+
 
 '''
 if dzielący listę adresów na listę. 
