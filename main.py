@@ -61,8 +61,17 @@ for url in urls:
     send_url['url'] = url
     send_url['type'] = choice
     json_content = json.dumps(send_url)
-    print(send_url['url'], " --> ", send_url['type'])
     response, send_url = http.request(ENDPOINT,
                                       method="POST",
                                       body=json_content)
     result = json.loads(send_url.decode())
+
+    if 'error' in result:
+        print(url, " --> ", choice)
+        print('Kod odpowiedzi: ', str(result['error']['code']))
+        print('Wiadomość: ', result['error']['message'])
+        print('---'*3)
+    else:
+        print(url, " --> ", choice)
+        print('URL został zaktualizowany bądź usunięty, czas: ', result['urlNotificationMetadata']['latestUpdate']['notifyTime'])
+        print('---' * 3)
