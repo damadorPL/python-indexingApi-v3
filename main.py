@@ -73,5 +73,4 @@ for url in urls:
         print('---'*3)
     else:
         print(url, " --> ", choice)
-        print('URL został zaktualizowany bądź usunięty, czas: ', result['urlNotificationMetadata']['latestUpdate']['notifyTime'])
         print('---' * 3)
