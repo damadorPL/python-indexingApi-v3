@@ -72,5 +72,5 @@ for url in urls:
         print('Wiadomość: ', result['error']['message'])
         print('---'*3)
     else:
-        print(url, " --> ", choice)
+        print(url, " --> ", choice, " --> Kod odpowiedzi: 200")
         print('---' * 3)
